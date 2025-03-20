@@ -4,41 +4,26 @@ using System.Diagnostics;
 namespace MyProject;
 
 public class Entry{
-    public List<string>_notices=new List<string>();
-    public void EntryData(string notice)
+    //simple class has entire data that we need
+    public DateTime _date;
+    public string _prompt;
+    public string _usersNotice;
+    //we have created Entry class as container for data of every notice
+    //and we made container of class here
+    public Entry(DateTime date, string prompt,  string usersNotice)
     {
-        _notices.Add(notice);
+        this._date=date;
+        this._prompt=prompt;
+        this._usersNotice=usersNotice;
+
     }
-    public void OutputData()
+    public override string ToString()//override method cuz it dosent work
     {
-        foreach (string notice in _notices){
-            Console.WriteLine(notice);
-        }
-    
+        return $"{_date:yyyy-MM-dd} | Prompt: {_prompt} | Entry: {_usersNotice}"; }
     }
-    public void SaveInFile()
-    {
-        Console.WriteLine("insert name of file");
-        string nameFile=Console.ReadLine();
-        File.WriteAllLines(nameFile,_notices);
-
-    }
-    public void LoadFromFile(string nameFile)
-    { 
-        if(File.Exists(nameFile))
-        {
-            _notices= new List<string>(File.ReadAllLines(nameFile));
-            System.Console.WriteLine("file downloaded");
-
-        }
-        else
-        {
-            Console.WriteLine("not found");
-
-        }
 
 
-    }
-    
 
-}
+
+
+   

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using MyProject;
@@ -9,7 +10,7 @@ class Program
     static void Main(string[] args)
     {
     Console.Write("Hello World! This is the Journal Project.");
-    Entry entry=new Entry();//make up instance of our Input-Output class Entry
+    Journal journal =new Journal();//make up instance of our Input-Output class Journal
 
 
        while(true){//ethernal cycle
@@ -20,19 +21,25 @@ class Program
             //handling users answers
             if(usersAnswerInt==1)
             {
-                PromptGenerator.Prompt();//call prompt func from prompt class,but it might be just method
+                string randomPromptOutput=PromptGenerator.Prompt();//call prompt func from prompt class,but it might be just method
+                System.Console.WriteLine(randomPromptOutput);
                 string usersNotice = Console.ReadLine();//read users notice
-                entry.EntryData(usersNotice);//call method to save it in List in class Entry
+                DateTime now =DateTime.Now;
+                Entry entry=new Entry(now,randomPromptOutput,usersNotice);
+                journal.AddNotices(entry);//call method to save it in List in class Entry
 
             }
             else if(usersAnswerInt==2)
             {
-                entry.OutputData();//call output method
+                journal.OutputData();//call output method
                 
             }
             else if(usersAnswerInt==3)
+
             {
-                entry.SaveInFile();
+                System.Console.WriteLine("insert file name");
+                string nameFile = Console.ReadLine();
+                journal.SaveInFile(nameFile);
         
 
             }
@@ -40,7 +47,7 @@ class Program
             {
                 Console.WriteLine("insert file name");
                 string readUsersFileName = Console.ReadLine();
-                entry.LoadFromFile(readUsersFileName);
+                journal.LoadFromFile(readUsersFileName);
 
             }
             else if(usersAnswerInt==5)
