@@ -3,7 +3,8 @@
     using System.Globalization;
     using System.Linq.Expressions;
     using System.Security.Cryptography.X509Certificates;
-    namespace MyProject;
+using System.Text.Json;
+namespace MyProject;
 
     
     public class Journal{
@@ -22,19 +23,66 @@
                 
         }
         public void SaveInFile(string filename){
+            if(!filename.EndsWith(".csv")) // ______Creativity extension - add .csv ,to be able open it in Excel
+            filename+=".csv";
+
                       
         { 
                         
-                using (StreamWriter writer = new StreamWriter(filename)) 
+            using (StreamWriter writer = new StreamWriter(filename)) 
         { 
             foreach (Entry entry in _notices) 
         { 
             writer.WriteLine($"{entry._date},{entry._prompt},{entry._usersNotice}"); } //make file and save there
                         
         }
-        Console.WriteLine($"\n notices was saves in file: {Path.GetFullPath(filename)}\n");//assurance
+        Console.WriteLine($"\n it was saved in file: {Path.GetFullPath(filename)}\n");//assurance
+        SaveJson(Path.ChangeExtension(filename,".json"));//______Creativity:call method for json saving
         }
     }
+
+        
+
+        public void SaveJson(string filename){// ______Creativity :method for JSON saving
+            string jsonContent = "[\n";
+    
+
+        for (int i = 0; i < _notices.Count; i++)
+         {
+        Entry entry = _notices[i];
+        
+        //make all entries to JSON 
+        jsonContent += "  {\n";
+        jsonContent += $"    \"date\": \"{entry._date}\",\n";
+        jsonContent += $"    \"prompt\": \"{entry._prompt.Replace("\"", "\\\"")}\",\n";
+        jsonContent += $"    \"entry\": \"{entry._usersNotice.Replace("\"", "\\\"")}\"\n";
+        jsonContent += "  }";
+        
+        // запятые
+        if (i < _notices.Count - 1)
+            jsonContent += ",";
+            
+        jsonContent += "\n";
+    }
+    
+         //закрываем массив(?)
+           jsonContent += "]";
+
+
+        
+        File.WriteAllText(filename,jsonContent);
+        System.Console.WriteLine($"it was saved json-{Path.GetFullPath(filename)}");
+    }
+
+    
+
+    
+
+
+
+
+
+
             
             
 

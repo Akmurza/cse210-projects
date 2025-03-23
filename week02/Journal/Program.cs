@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using MyProject;
 
-class Program
+class Program // in class Journal was added creativity feature and method to save text in Json ( SaveJson())
 {
     static void Main(string[] args)
     {
