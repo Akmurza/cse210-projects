@@ -13,9 +13,9 @@ public class Reference
     public Reference(string book, int chapter, int verse)
     {
         _book = book;
-    _chapter = chapter;
-    _startVerse = verse;
-    _endVerse = verse;
+        _chapter = chapter;
+        _startVerse = verse;
+        _endVerse = verse;
     }
 
 
@@ -31,7 +31,11 @@ public class Reference
     _endVerse =endVerse;
     }
 
-    public override string ToString()
+
+
+
+
+    public override string ToString()//i have had to enter this func otherwise it doesent work
     {
       
       

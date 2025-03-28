@@ -8,6 +8,9 @@ public class Word
 
 
          private string _text;
+         
+         //hidden flag
+
          private bool _isHidden;
 
          public Word(string text)
@@ -26,7 +29,7 @@ public class Word
              return _isHidden;
         }
 
-    public string GetRenderedText()
+    public string GetWrittenText()//getter
     {
         if (_isHidden)
         {
@@ -40,6 +43,6 @@ public class Word
 
     public override string ToString()
     {
-        return GetRenderedText();
+        return GetWrittenText();
     }
 }

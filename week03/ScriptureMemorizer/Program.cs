@@ -12,7 +12,8 @@ class Program
     {
         //make reference
         Reference reference = new Reference("John", 3, 16);
-        //make text
+
+        //make text 
             string scriptureText = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
         
         // make scripture + reference+ text
@@ -31,7 +32,7 @@ class Program
             
             userInput = Console.ReadLine();
                  // subs random words if user plays
-            if (userInput.ToLower()!=  "quit")
+            if (userInput !=  "quit")
                 scripture.HideRandomWords(2); // Hide 2 words at a time
             
         }

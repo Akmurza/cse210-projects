@@ -10,29 +10,28 @@ namespace MyProj;
           private Reference _reference;
          private List<Word> _words;
 
-         public Scripture(Reference reference, string text)
+         public Scripture(Reference reference, string text)//init constructor
     {
         _reference = reference;
         _words = new List<Word>();
 
-            //break down the text to words and make it as Word objects
+            //break down the text to words and make it as Word array
             string[] wordArray = text.Split(' ');
             foreach (string wordText in wordArray)
             {
             Word word = new Word(wordText);
-            _words.Add(word);
-             }
+            _words.Add(word);}
     }
 
 
 
 
-
+//hide function
     public void HideRandomWords(int numberToHide)
     {
         Random random = new Random();
         int wordsHidden = 0;
-        // Continue hiding words till hidden is requested number
+        // Continue hiding words till hidden is't requested number or
             //until all words will be hidden
         while (wordsHidden < numberToHide && !AllWordsHidden())
         {
@@ -56,14 +55,14 @@ namespace MyProj;
         }
             return true;
     }
-    
+
 
                 public string GetDisplayText()
     {
                string displayText = _reference.ToString() + " ";
         foreach (Word word in _words)
         {
-            displayText += word.GetRenderedText() + " ";}
+            displayText += word.GetWrittenText() + " ";}
         return displayText.Trim();
     }
 }
