@@ -4,26 +4,66 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MyProj;
 
-public class Scripture{
-//список из цитат
-public static string MakeScriptures(){
-    List<string>_Scriptures=new List<string>();
-    _Scriptures.Add("For God so loved the world that He gave His only begotten Son, that whosoever believeth in Him should not perish, but have everlasting life.");
-    _Scriptures.Add("John 3:16");
-    _Scriptures.Add("Trust in the Lord with all thine heart, and lean not unto thine own understanding");
-    _Scriptures.Add("in all thy ways acknowledge Him, and He shall direct thy paths.");
-    _Scriptures.Add("Proverbs 3:5-6");
-    _Scriptures.Add("3 Go your ways; behold, I send you forth as lambs among wolves,");
-    _Scriptures.Add("4 carrying neither purse, nor pack, nor shoes; and salute no man by the way.");
-    _Scriptures.Add ("5 And into whatsoever house ye enter, first say, ‘Peace be to this house.");
-    _Scriptures.Add("Luke 10:3-5");
-    _Scriptures.Add("Verily I say unto you, among them that are born of women, there hath not risen a greater than John the Baptist; notwithstanding, he that is least in the Kingdom of Heaven is greater than he.");
-    _Scriptures.Add("Matthew 11:11");
-    Random random=new Random();
-    int randomIndex = random.Next(_Scriptures.Count);
-    string _text = _Scriptures[randomIndex]+(" ")+_Scriptures[randomIndex+1];
-    return _text;
-    //эта переменная приватная а доступ к ней через геттер
-}
 
+     public class Scripture
+{
+          private Reference _reference;
+         private List<Word> _words;
+
+         public Scripture(Reference reference, string text)
+    {
+        _reference = reference;
+        _words = new List<Word>();
+
+            //break down the text to words and make it as Word objects
+            string[] wordArray = text.Split(' ');
+            foreach (string wordText in wordArray)
+            {
+            Word word = new Word(wordText);
+            _words.Add(word);
+             }
+    }
+
+
+
+
+
+    public void HideRandomWords(int numberToHide)
+    {
+        Random random = new Random();
+        int wordsHidden = 0;
+        // Continue hiding words till hidden is requested number
+            //until all words will be hidden
+        while (wordsHidden < numberToHide && !AllWordsHidden())
+        {
+            int randomIndex = random.Next(0, _words.Count);
+            // hide the word if it isnt hidden
+            if (!_words[randomIndex].IsHidden())
+            {
+            _words[randomIndex].Hide();
+            wordsHidden++;
+            }
+        }
+    }
+
+    public bool AllWordsHidden()
+    {
+        foreach (Word word in _words)
+        {
+            if (!word.IsHidden())
+            return false;
+            
+        }
+            return true;
+    }
+    
+
+                public string GetDisplayText()
+    {
+               string displayText = _reference.ToString() + " ";
+        foreach (Word word in _words)
+        {
+            displayText += word.GetRenderedText() + " ";}
+        return displayText.Trim();
+    }
 }

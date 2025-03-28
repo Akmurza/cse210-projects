@@ -4,76 +4,47 @@ using System.Security.Cryptography;
 using Microsoft.Win32.SafeHandles;
 namespace MyProj;
 
+using System;
+
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Project.");
-        System.Console.WriteLine(Scripture.MakeScriptures());
+        //make reference
+        Reference reference = new Reference("John", 3, 16);
+        //make text
+            string scriptureText = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
         
+        // make scripture + reference+ text
+        Scripture scripture = new Scripture(reference, scriptureText);
         
-        while(true){
-            System.Console.WriteLine("hello tap Enter if you want to play or tap quit if you want to cancel");
-            string usersEnter = Console.ReadLine();
+            //main while loop
+             string userInput = "";
+            while (userInput.ToLower() != "quit" && !scripture.AllWordsHidden())
+        {
+                    //clear all
+            Console.Clear();
+            Console.WriteLine(scripture.GetDisplayText());
+            Console.WriteLine();
+            Console.WriteLine("Please press enter to continue play or 'quit' to quit:");
             
-            if(usersEnter=="")
-            {
-                System.Console.WriteLine("oi");
-                //очистка консоли и отображение нового текста
-                Console.Clear();
-                Console.WriteLine(Word.NewWord());
-
-
-                //вызов ВОРД функции скрытия случайных слов(генератор случайных индексов+замена в тексте побуквенно)
-
-                
-
-                //опять запрос ввода энтер или выход
-                //снова замещение нескольких слов пробелами пока все не закроется
             
-
-                //
-                //
-
-            }
-            else{
-                return;
-            }
+            userInput = Console.ReadLine();
+                 // subs random words if user plays
+            if (userInput.ToLower()!=  "quit")
+                scripture.HideRandomWords(2); // Hide 2 words at a time
+            
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //программа должна заканчиваться либо выходом либо полным исчезновением букв
-        //Содержать не менее 3 классов в дополнение к Programклассу: один для самого Священного Писания, один для ссылки (например, «Иоанна 3:16») и для представления слова в Священном Писании.
-        //Предоставьте несколько конструкторов для ссылки на Священное Писание, чтобы обрабатывать случай одного стиха и диапазона стихов («Притчи 3:5» или «Притчи 3:5-6»).
-        //В демонстрационном видео вы можете видеть, что когда пользователь нажимал клавишу ввода, слова на экране «исчезали» или заменялись подчеркиваниями. На самом деле, консоль очищалась, а затем писание снова распечатывалось, но на этот раз с подчеркиваниями вместо определенных слов.
-
-//*Очистить консоль можно с помощью Console.Clear()метода.
-
-
-// This will start by displaying "AAA" and waiting for the user to press the enter key
-//Console.WriteLine("AAA");
-//Console.ReadLine();
-
-// This will clear the console
-//Console.Clear();
-
-// This will show "BBB" in the console where "AAA" used to be
-//Console.WriteLine("BBB");
-        //
-        //
-
-
-
+        
+    // show the final scripture if all are hidden
+        if (scripture.AllWordsHidden())
+        {
+            Console.Clear();
+            Console.WriteLine(scripture.GetDisplayText());
+            Console.WriteLine();
+            Console.WriteLine("All words is hidden. Well done!");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
     }
 }

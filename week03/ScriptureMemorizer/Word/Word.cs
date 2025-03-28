@@ -1,29 +1,45 @@
+using System.Diagnostics.Contracts;
+
 namespace MyProj;
 
 
-class Word{
-    public static string NewWord(){
-        string _editedText=Scripture.MakeScriptures();
-        string[] _wordsArray = _editedText.Split(new char[] { ' ' },StringSplitOptions.RemoveEmptyEntries);
+public class Word
+{
 
-        foreach (string word in _wordsArray)
+
+         private string _text;
+         private bool _isHidden;
+
+         public Word(string text)
+           {
+              _text = text;
+             _isHidden = false;
+            }
+
+          public void Hide()
         {
-            Console.WriteLine(word); 
+            _isHidden = true;
         }
-        Random random =new Random();
-        int _randomIndexToChange = random.Next(_wordsArray.Length);
-        string _randomWord=_wordsArray[_randomIndexToChange];
-        if(_randomWord.Contains("_")){
 
+        public bool IsHidden()
+        {
+             return _isHidden;
         }
-        char[]changedWord = new char[_randomWord.Length];
-        for(int i=0; i< _randomWord.Length;i++)
-        {    
-            changedWord[i]='_';
 
+    public string GetRenderedText()
+    {
+        if (_isHidden)
+        {
+               // it is return _ = number of letters in the word
+            return new string('_', _text.Length);
         }
-        string resultWord=new string(changedWord);
-        string newText = _editedText.Replace(_randomWord,resultWord);
-        return newText;
+        else
+         return _text;
+        
+    }
+
+    public override string ToString()
+    {
+        return GetRenderedText();
     }
 }
