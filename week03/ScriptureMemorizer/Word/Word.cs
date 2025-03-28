@@ -9,14 +9,14 @@ public class Word
 
          private string _text;
          
-         //hidden flag
+         
 
-         private bool _isHidden;
+         private bool _isHidden;//hidden flag
 
          public Word(string text)
            {
-              _text = text;
-             _isHidden = false;
+            _text = text;
+            _isHidden = false;
             }
 
           public void Hide()
@@ -26,23 +26,22 @@ public class Word
 
         public bool IsHidden()
         {
-             return _isHidden;
+            return _isHidden;
         }
 
-    public string GetWrittenText()//getter
+    public string GetRenderedText()//getter
     {
         if (_isHidden)
         {
-               // it is return _ = number of letters in the word
+            // it is return _ = number of letters in the word
             return new string('_', _text.Length);
         }
         else
-         return _text;
-        
-    }
+             return _text;
+        }
 
     public override string ToString()
     {
-        return GetWrittenText();
+        return GetRenderedText();
     }
 }

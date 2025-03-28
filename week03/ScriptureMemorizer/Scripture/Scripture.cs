@@ -51,7 +51,6 @@ namespace MyProj;
         {
             if (!word.IsHidden())
             return false;
-            
         }
             return true;
     }
@@ -62,7 +61,7 @@ namespace MyProj;
                string displayText = _reference.ToString() + " ";
         foreach (Word word in _words)
         {
-            displayText += word.GetWrittenText() + " ";}
+            displayText += word.GetRenderedText() + " ";}
         return displayText.Trim();
     }
 }

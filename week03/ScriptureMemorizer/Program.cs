@@ -14,16 +14,16 @@ class Program
         Reference reference = new Reference("John", 3, 16);
 
         //make text 
-            string scriptureText = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
+        string scriptureText = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
         
         // make scripture + reference+ text
         Scripture scripture = new Scripture(reference, scriptureText);
         
             //main while loop
-             string userInput = "";
+            string userInput = "";
             while (userInput.ToLower() != "quit" && !scripture.AllWordsHidden())
         {
-                    //clear all
+            //clear all
             Console.Clear();
             Console.WriteLine(scripture.GetDisplayText());
             Console.WriteLine();
@@ -31,7 +31,7 @@ class Program
             
             
             userInput = Console.ReadLine();
-                 // subs random words if user plays
+                // subs random words if user plays
             if (userInput !=  "quit")
                 scripture.HideRandomWords(2); // Hide 2 words at a time
             
