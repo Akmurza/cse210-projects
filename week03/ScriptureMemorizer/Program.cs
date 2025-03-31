@@ -9,7 +9,6 @@ namespace MyProj;
 // char and implemented the logic added in the word class, adding a couple more conditions in the body of the program in the Scripture class
 //  and main in Program
 
-
 //i implemented hiding of not only random words,but specifically those words that was not hidden yet! 
 //i have done it using the IsHidden flag in the word class and a loop that checks whether the word is hidden(noticed it in commets of class)
 class Program
