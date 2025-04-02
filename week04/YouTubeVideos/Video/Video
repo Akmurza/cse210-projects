@@ -1,0 +1,29 @@
+namespace Proj;
+
+public class Video{
+    public string _title;
+    public string _author;
+    public int _duration;
+    List <Comment> comment;
+
+    public Video(string title, string author, int duration,comment Comment){
+        _author=author;
+        _title=title;
+        _duration=duration;
+
+    }
+
+    int numberOfCommets;
+
+    public GetNumberOfComments(){
+
+    }
+
+     public Overview ()
+        {
+
+        }
+
+
+
+}

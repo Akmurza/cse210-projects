@@ -1,0 +1,15 @@
+namespace Proj;
+
+public class Comment{
+    string commentsAuthor;
+    string commentsText;
+
+    public Comment(string commentsAuthor,string commentsText){
+
+        
+    }
+
+
+
+
+}
