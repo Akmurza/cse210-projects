@@ -50,6 +50,7 @@ class Program
                 }
                 
                 Console.WriteLine("\n+++++++++++\n");
+                
             }
         }
     }

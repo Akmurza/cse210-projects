@@ -20,4 +20,10 @@ public Video(string title, string author, int duration,   List<Comment> comments
     public string GetAuthor() => _author;
     public int GetDuration() => _duration;
     public List<Comment> GetComments() => _comments;
+    
+
+
+
+
     }
+
