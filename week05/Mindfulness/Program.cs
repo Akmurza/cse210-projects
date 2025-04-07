@@ -15,7 +15,8 @@ class Program
             "Press number of preferable activity to continue..."+
             "\n\n" +
             "1. Breathing Exercise" +
-            "\n 2. Listing Exercise" +
+            "\n\n" +
+            "2. Listing Exercise" +
             "\n\n" +
             "3. Reflection Exercise" + 
             "\n\n" +
@@ -49,11 +50,5 @@ class Program
             return;
         }
 
-
-
-        
-
-        
-        
     }
 }
