@@ -4,51 +4,46 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Mindfulness Project.");
-        System.Console.WriteLine(
-            "This project is designed to help you practice mindfulness and improve your mental well-being." +
-            "\n\n" +
-            "We will guide you through a series of exercises that focus on breathing, meditation, and self-reflection." +
-            "\n\n" +
-            "Let's get started!" +
-            "\n\n" +
-            "Press number of preferable activity to continue..."+
-            "\n\n" +
-            "1. Breathing Exercise" +
-            "\n\n" +
-            "2. Listing Exercise" +
-            "\n\n" +
-            "3. Reflection Exercise" + 
-            "\n\n" +
-            "4. Quit " 
-        );
-        string chosenActivityCode=Console.ReadLine();
-        Console.Clear();
-        if (chosenActivityCode == "1")
+        bool runningProgram = true;
+        while (runningProgram)
         {
-            Breathing breathing = new Breathing();
-            breathing.StartExercise();
+            Console.Clear();
+            Console.WriteLine("Menu options:");
+            Console.WriteLine("1.Breathing exercise");
+            Console.WriteLine("2.Listing exercise");
+            Console.WriteLine("3.Reflection exercise");
+            Console.WriteLine("4. Quit");
+            
+            string chosenActivityCode = Console.ReadLine();
+            Console.Clear();
+            
+            if (chosenActivityCode == "1")
+            {
+            BreathingActivity breathing = new BreathingActivity("Breathing.......", 
+            "This activity will help you relax a bit you through breathing in and out slowly.", 0);
+             breathing.Run();
+            }
+            else if (chosenActivityCode == "2")
+            {
+                ListingActivity listing = new ListingActivity("Listing..",
+                "This activity will help you reflect on good things in your life by having you list as many things as you can.", 0);
+            listing.Run();
+            }
+            else if (chosenActivityCode == "3")
+            {
+                ReflectingActivity reflection = new ReflectingActivity("Reflection!",
+                    "This activity will help you reflect your life when you have shown strength and resilience.", 0);
+            reflection.Run();
+            }
+            else if (chosenActivityCode == "4")
+            {
+            runningProgram = false;
+            }
+            else
+            {
+            Console.WriteLine("Invalid option. Press any key to continue...");
+            Console.ReadKey();
+            }
         }
-        else if (chosenActivityCode == "2")
-        {
-            Listing listing = new Listing();
-            listing.StartExercise();
-        }
-        else if (chosenActivityCode == "3")
-        {
-            Reflection reflection = new Reflection();
-            reflection.StartExercise();
-        }
-        else if (chosenActivityCode == "4")
-        {
-            Console.WriteLine("Thank you for participating! Have a great day!");
-            return;
-        }
-        else
-        {
-            Console.WriteLine("Invalid choice. Please try again.");
-            return;
-        }
-
     }
 }

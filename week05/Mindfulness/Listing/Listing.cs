@@ -1,41 +1,63 @@
-public class Listing : Activity{
-    private List<string> _prompts = new List<string>
+using System;
+using System.Collections.Generic;
+
+public class ListingActivity : Activity
+{
+    private List<string> _prompts;
+    private int _count;
+
+    public ListingActivity(string name, string description, int duration) 
+        : base(name, description, duration)
     {
-        "What kind of people do you value?",
-        "What are your strengths?",
-        "Who have you helped this week?",
-        "Who are your personal heroes?"
-    };
-
-        private string _prompt;
-
-        public string GetRandomPrompt()
-        {
-            Random random = new Random();
-            int index = random.Next(_prompts.Count);
-            _prompt = _prompts[index];
-            return _prompt;
-        }
-
-        public void DisplayPrompt()
-        {
-            Console.WriteLine(GetRandomPrompt());
-        }
-
-        public void StartExercise()
-        {
-            base.StartExercise();
-            Console.Clear();
-            Console.WriteLine("Listing Exercise: " + _prompt);
-            Console.WriteLine("Take a moment to reflect on this prompt and write down your thoughts.");
-            Console.WriteLine("Press Enter when you are ready to continue...");
-            Console.ReadLine();
-
-            Console.WriteLine("Your thoughts: ");
-            string thoughts = Console.ReadLine();
-
-            Console.WriteLine("Thank you for your listing!");
-            EndExercise();
+        _prompts = new List<string> 
+        { 
+            "Who are people that you appreciate?",
+            "What are personal strengths of yours?",
+            "Who are people that you have helped this week?",
+            "When have you felt the Holy Ghost this month?",
+            "Who are some of your personal heroes?"
+        };
+        _count = 0;
+    }
+    public string GetRandomPrompt()
+    {
+        Random random = new Random();
+        int index = random.Next(_prompts.Count);
+        return _prompts[index];
+    }
+    public List<string> GetListFromUser()
+    {
+        List<string> items = new List<string>();
         
+        DateTime startTime = DateTime.Now;
+        DateTime endTime = startTime.AddSeconds(_duration);
+        
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("> ");
+            string item = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(item))
+            {
+                items.Add(item);
+            }
         }
+        return items;
+    }
+    public void Run()
+    {
+        DisplayStartingMessage();
+        string prompt = GetRandomPrompt();
+        
+        Console.WriteLine("List as many responses as you can to the following prompt:");
+        Console.WriteLine($" {prompt} ");
+        Console.WriteLine("You may begin in:");
+        ShowCountDown(5);
+        Console.WriteLine();
+        
+        
+        List<string>  items = GetListFromUser();
+
+        Console.WriteLine($"You listed {items.Count} items!");
+        DisplayEndingMessage();
+    }
 }
