@@ -16,7 +16,6 @@ public class ReflectingActivity : Activity
             "Think of a time when you helped someone in need.",
             "Think of a time when you did something truly selfless."
         };
-        
         _questions = new List<string>
         {
             "Why was this experience meaningful to you?",
@@ -36,14 +35,12 @@ public class ReflectingActivity : Activity
         int index = random.Next(_prompts.Count);
         return _prompts[index];
     }
-
     public string GetRandomQuestion()
     {
         Random random = new Random();
         int index = random.Next(_questions.Count);
         return _questions[index];
     }
-
     public void DisplayPrompt()
     {
         string prompt = GetRandomPrompt();
@@ -65,14 +62,12 @@ public class ReflectingActivity : Activity
         Console.WriteLine();
         Console.WriteLine($"{question}");
     }
-
     public void Run()
     {
         DisplayStartingMessage();
         DisplayPrompt();
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
-        
         while (DateTime.Now < endTime)
         {
             DisplayQuestion();

@@ -8,7 +8,7 @@ class Program
         while (runningProgram)
         {
             Console.Clear();
-            Console.WriteLine("Menu options:");
+            Console.WriteLine("Menu:");
             Console.WriteLine("1.Breathing exercise");
             Console.WriteLine("2.Listing exercise");
             Console.WriteLine("3.Reflection exercise");

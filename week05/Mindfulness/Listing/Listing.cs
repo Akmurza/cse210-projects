@@ -28,7 +28,6 @@ public class ListingActivity : Activity
     public List<string> GetListFromUser()
     {
         List<string> items = new List<string>();
-        
         DateTime startTime = DateTime.Now;
         DateTime endTime = startTime.AddSeconds(_duration);
         
@@ -47,7 +46,6 @@ public class ListingActivity : Activity
     {
         DisplayStartingMessage();
         string prompt = GetRandomPrompt();
-        
         Console.WriteLine("List as many responses as you can to the following prompt:");
         Console.WriteLine($" {prompt} ");
         Console.WriteLine("You may begin in:");
