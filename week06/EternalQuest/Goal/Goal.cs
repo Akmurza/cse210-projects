@@ -1,4 +1,4 @@
-abstract class Goal{
+public abstract class Goal{
     public string _shortName;
     public string _description;
     public string _points;
@@ -9,14 +9,20 @@ abstract class Goal{
         _points = points;
     }
 
-    public abstract void RecordEvent();
+    public abstract int RecordEvent()
+    {
+        IsComplete = true;
+        return Points;
+    }
+
     public abstract bool IsComplete() {
         return false;
     }
     public abstract string GetDetailsString(){
         return $"{_shortName} ({_description}) - Points: {_points}";
     };
-    public abstract string GetStringRepresentation(){
-        return $"{_shortName},{_description},{_points}";
-    };
+    public virtual string GetStringRepresentation()
+    {
+        return $"{GetType().Name}:{_shortName},{_description},{_points},{IsComplete}";
+    }
 }
