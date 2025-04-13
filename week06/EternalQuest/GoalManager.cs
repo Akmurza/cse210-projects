@@ -180,13 +180,11 @@ namespace EternalQuest
             if (int.TryParse(input, out int goalIndex) && goalIndex > 0 && goalIndex <= _goals.Count)
             {
                 Goal selectedGoal = _goals[goalIndex - 1];
-                
-                // Записываем событие и получаем очки
                 int pointsEarned = selectedGoal.RecordEvent();
                 _score += pointsEarned;
 
                 Console.WriteLine($"\nCongratulations! You have earned {pointsEarned} points!");
-                Console.WriteLine($"You now have {_score} points.");
+                Console.WriteLine($"You now have {_score} total points.");
             }
             else
             {
@@ -274,6 +272,34 @@ namespace EternalQuest
                     return checklistGoal;
             }
             return null;
+        }
+
+
+
+
+
+//  added method to check levels of goals
+
+        public void CheckLevels()
+        {
+            foreach (Goal goal in _goals)
+            {
+                // check if goal is levelable
+                if (goal is ILevelable levelable)
+                {
+                    // check if goal can level up
+                    if (levelable.CanLevelUp())
+                    {
+                        // get bonus points
+                        int bonusPoints = levelable.ProcessLevelUp();
+                        _score += bonusPoints;
+                        
+                        // show info Level UP!
+                        Console.WriteLine($"Level Up! {goal.Name} reached level {levelable.GetLevel()}");
+                        Console.WriteLine($"Bonus points earned: {bonusPoints}");
+                    }
+                }
+            }
         }
     }
 }
