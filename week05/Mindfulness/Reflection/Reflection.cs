@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 public class ReflectingActivity : Activity
 {
     private List<string> _prompts;
     private List<string> _questions;
+    private List<string> _redundantPrompts;//added list to store redundant prompts
+    private List<string> _redundantQuestions;//added list to store redundant questions
 
     public ReflectingActivity(string name, string description, int duration) 
         : base(name, description, duration)
@@ -28,12 +31,38 @@ public class ReflectingActivity : Activity
             "What did you learn about yourself through this experience?",
             "How can you keep this experience in mind in the future?"
         };
+        //init 
+        RenewRedundantPrompts();
+        RenewRedundantQuestions();
     }
+        //update lists to remove used prompts and questions
+        private void RenewRedundantPrompts()
+        {
+            _redundantPrompts = new List<string>(_prompts);
+        }
+        private void RenewRedundantQuestions()
+        {
+            _redundantQuestions = new List<string>(_questions);
+        }
+
+
+
+
+
+
+    
     public string GetRandomPrompt()
     {
+        
+        if (_redundantPrompts.Count == 0)
+        {
+            RenewRedundantPrompts();
+        }
         Random random = new Random();
-        int index = random.Next(_prompts.Count);
-        return _prompts[index];
+        int index = random.Next(_redundantQuestions.Count);
+        string question=_redundantQuestions[index];
+        _redundantQuestions.RemoveAt(index); // remove the used question
+        return question;
     }
     public string GetRandomQuestion()
     {

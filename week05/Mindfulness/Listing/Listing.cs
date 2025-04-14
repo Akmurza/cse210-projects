@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class ListingActivity : Activity
 {
     private List<string> _prompts;
+    private List<string> _redundantPrompts;//add list to store redundant prompts
     private int _count;
 
     public ListingActivity(string name, string description, int duration) 
@@ -18,12 +19,27 @@ public class ListingActivity : Activity
             "Who are some of your personal heroes?"
         };
         _count = 0;
+
+        RenewRedundantPrompts();
+    }
+
+    private void RenewRedundantPrompts()
+    {
+        _redundantPrompts = new List<string>(_prompts);
     }
     public string GetRandomPrompt()
-    {
+    {   
+
+        if (_redundantPrompts.Count == 0)
+        {
+        RenewRedundantPrompts();
+        }
         Random random = new Random();
-        int index = random.Next(_prompts.Count);
-        return _prompts[index];
+        int index = random.Next(_redundantPrompts.Count);
+        string prompt = _redundantPrompts[index];
+        _redundantPrompts.RemoveAt(index);
+        return prompt;
+        
     }
     public List<string> GetListFromUser()
     {
